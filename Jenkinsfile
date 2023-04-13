@@ -12,7 +12,7 @@ pipeline {
     }
     
     tools{
-        maven 'maven-3.9.0'
+        maven 'maven'
     }
 
     stages {
@@ -63,14 +63,14 @@ pipeline {
             }
         }
       stage('push') {
-        // input{
-        //     message "Select the environment to deploy"
-        //     ok "done"
-        //     parameters{
-        //         choice(name: 'Type', choices:['Dev','Test','Deploy'], description: '')
-        //     }
+         input{
+            message "Select the environment to deploy"
+            ok "done"
+            parameters{
+                choice(name: 'Type', choices:['Dev','Test','Deploy'], description: '')
+            }
 
-        // }
+         }
             steps {
                 script{echo 'deploying the application'
                 withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
